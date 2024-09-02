@@ -790,7 +790,7 @@ jobs:
                  --owner=0 --group=0 -C ${OUTPUT_BASE}/${OUTPUT_DIR} ${{ matrix.target }}
         elif [ "${{ matrix.host.archive }}" == "7z" ]; then
           pushd ${OUTPUT_BASE}/${OUTPUT_DIR}
-          7z a -t7z -l ${GITHUB_WORKSPACE}/${ARCHIVE_FILE} ${{ matrix.target }}
+          7z a -t7z ${GITHUB_WORKSPACE}/${ARCHIVE_FILE} ${{ matrix.target }}
           popd
         fi
 
