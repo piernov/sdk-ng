@@ -438,6 +438,13 @@ jobs:
     #     echo "GITHUB_SHA: ${GITHUB_SHA}"
     #     echo "GITHUB_REF: ${GITHUB_REF}"
 
+    - name: Install NodeJS for use with act
+      run: |
+        apt-get update
+        #apt-get install -y curl
+        #curl -sSL https://deb.nodesource.com/setup_16.x | bash
+        apt install -y nodejs
+
     - name: Set up build environment (Linux)
       if: ${{ runner.os == 'Linux' }}
       run: |
