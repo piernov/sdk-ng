@@ -441,6 +441,14 @@ jobs:
     - name: Set up build environment (Linux)
       if: ${{ runner.os == 'Linux' }}
       run: |
+        if [ "${{ matrix.host.name }}" == "windows-x86_64" ]; then
+          # Install additional tools missing from ubuntu:24.10 image
+          apt-get update
+          # Install tzdata non-interactively as it is in the dependency chain of meson and requires user input
+          DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y --no-install-recommends install tzdata
+          apt-get install -y --no-install-recommends sudo git build-essential unzip gawk meson ninja-build
+        fi
+
         # Create workspace directory
         WORKSPACE="${RUNNER_TEMP}/workspace"
         sudo mkdir -p ${WORKSPACE}
